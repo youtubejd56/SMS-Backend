@@ -18,6 +18,7 @@ from .views import (
     AdminDashboardView
 )
 
+# DRF Router for viewsets
 router = DefaultRouter()
 router.register(r'marks', StudentMarkViewSet, basename='marks')
 router.register(r'posts', EventPostViewSet, basename='posts')
@@ -25,6 +26,7 @@ router.register(r'shorts', ShortsViewSet, basename='shortvideo')
 router.register(r'attendance', AttendanceViewSet, basename='attendance')
 
 urlpatterns = [
+    # ViewSets via DRF Router
     path('', include(router.urls)),
 
     # AI Chat
@@ -36,9 +38,9 @@ urlpatterns = [
     path("admin-forgot-password/", admin_forgot_password, name="admin-forgot-password"),
 
     # Admission
-    path("admission/", AdmissionView.as_view(), name="admission-post"),             # POST
-    path("admissions/", AdmissionListView.as_view(), name="admissions-list"),      # GET all
-    path("admissiondata/", AdmissionListView.as_view(), name="admissions-alias"),  # Alias for frontend
+    path("admission/", AdmissionView.as_view(), name="admission-post"),  # POST
+    path("admissions/", AdmissionListView.as_view(), name="admissions-list"),  # GET all
+    path("admissiondata/", AdmissionListView.as_view(), name="admissions-alias"),  # Alias
 
     # Marks clear
     path("marks/clear_division/<str:division>/", clear_division_marks, name="clear-division-marks"),
@@ -49,3 +51,4 @@ urlpatterns = [
     path("attendance/list/", get_attendance, name="get-attendance"),
     path("attendance-summary/", attendance_summary, name="attendance-summary"),
 ]
+
